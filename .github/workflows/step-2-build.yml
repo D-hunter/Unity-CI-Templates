@@ -27,6 +27,11 @@ on:
       combineArtifacts:
         type: string
         required: false
+      useGitLfs:
+        description: "Whether to use Git LFS (true/false)"
+        type: string
+        required: false
+        default: "false"
     secrets:
       UNITY_EMAIL: { required: true }
       UNITY_PASSWORD: { required: true }
@@ -76,8 +81,20 @@ jobs:
         include: ${{ fromJson(needs.generate_matrix.outputs.matrix) }}
 
     steps:
+      - name: Cleanup build folder
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          lfs: ${{ inputs.useGitLfs }}
+
+      - name: Git LFS Pull
+        if: ${{ inputs.useGitLfs == 'true' }}
+        run: git lfs pull
 
       - name: Restore Unity Caches (Library + BuildCache)
         uses: actions/cache@v4
@@ -97,7 +114,7 @@ jobs:
 
       - name: Resolve Build Profile
         id: resolve_build_profile
-        uses: avalin/unity-ci-templates/.github/actions/resolve-build-profile@main
+        uses: D-hunter/unity-ci-templates/.github/actions/resolve-build-profile@main
         with:
           buildTarget: ${{ matrix.buildTarget }}
           buildType: ${{ inputs.buildType }}
@@ -105,7 +122,7 @@ jobs:
 
       - name: Resolve Unity Run Parameters
         id: resolve_run_parameters
-        uses: avalin/unity-ci-templates/.github/actions/resolve-unity-run-parameters@main
+        uses: D-hunter/unity-ci-templates/.github/actions/resolve-unity-run-parameters@main
         with:
           buildTarget: ${{ matrix.buildTarget }}
 
@@ -118,19 +135,20 @@ jobs:
         with:
           unityVersion: ${{ inputs.unityVersion }}
           targetPlatform: ${{ steps.resolve_run_parameters.outputs.targetPlatform }}
+          # allowDirtyBuild: true
           customParameters: >-
             ${{ steps.resolve_run_parameters.outputs.customParameters }}
             ${{ steps.resolve_build_profile.outputs.profile && format('-buildProfile {0}', steps.resolve_build_profile.outputs.profile) || '' }}
 
-      - name: Save Unity Caches (after successful build)
-        uses: actions/cache/save@v4
-        if: success()
-        with:
-          path: |
-            Library
-            Library/BuildCache
-            Library/Il2cppBuildCache
-          key: Library-${{ matrix.buildTarget }}-${{ github.run_id }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+      # - name: Save Unity Caches (after successful build)
+      #   uses: actions/cache/save@v4
+      #   if: success()
+      #   with:
+      #     path: |
+      #       Library
+      #       Library/BuildCache
+      #       Library/Il2cppBuildCache
+      #     key: Library-${{ matrix.buildTarget }}-${{ github.run_id }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
 
       - name: Fix Permissions (Linux only)
         if: startsWith(matrix.os, 'ubuntu')

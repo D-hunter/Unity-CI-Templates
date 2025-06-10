@@ -1,26 +1,26 @@
 {
   "Android": {
-    "os": "ubuntu-latest",
+    "os": "self-hosted",
     "minimumBuildType": "preview"
   },
   "WebGL": {
-    "os": "ubuntu-latest",
+    "os": "self-hosted",
     "minimumBuildType": "preview"
   },
   "StandaloneLinux64-Client": {
-    "os": "ubuntu-latest",
+    "os": "self-hosted",
     "minimumBuildType": "preview"
   },
   "StandaloneLinux64-Server": {
-    "os": "ubuntu-latest",
+    "os": "self-hosted",
     "minimumBuildType": "preview"
   },
   "StandaloneWindows": {
-    "os": "ubuntu-latest",
+    "os": "self-hosted",
     "minimumBuildType": "preview"
   },
   "StandaloneWindows64": {
-    "os": "ubuntu-latest",
+    "os": "self-hosted",
     "minimumBuildType": "preview"
   },
   "StandaloneOSX": {

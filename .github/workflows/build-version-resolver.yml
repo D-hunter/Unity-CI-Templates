@@ -26,15 +26,22 @@ jobs:
     steps:
       - name: 📡 Setup Git (fetch tags + default branch)
         run: |
+          # Clean up any existing corrupted Git repository
+          rm -rf .git
+          
+          # Initialize fresh Git repository
           git init
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git fetch origin --tags --force
-          git fetch origin $(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
-          git checkout $(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+          
+          # Get default branch and force checkout with overrides
+          DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+          git fetch origin $DEFAULT_BRANCH --force
+          git checkout --force -B $DEFAULT_BRANCH origin/$DEFAULT_BRANCH
 
       - name: Resolve Build Version
         id: get_version
-        uses: avalin/unity-ci-templates/.github/actions/resolve-build-version@main
+        uses: D-hunter/unity-ci-templates/.github/actions/resolve-build-version@main
         with:
           ref: "${GITHUB_REF}"
           event: "${GITHUB_EVENT_NAME}"
@@ -43,7 +50,7 @@ jobs:
 
       - name: 📝 Check if Release Version Already Exists
         id: check_release
-        uses: avalin/unity-ci-templates/.github/actions/check-release-exists@main
+        uses: D-hunter/unity-ci-templates/.github/actions/check-release-exists@main
         with:
           version: ${{ steps.get_version.outputs.version }}
           repo: ${{ github.repository }}

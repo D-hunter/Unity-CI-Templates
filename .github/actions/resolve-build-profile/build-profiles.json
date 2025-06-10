@@ -20,12 +20,12 @@
       "release": "CI-LinuxServer-Release"
     },
     "StandaloneWindows": {
-      "preview": "CI-Windows-Preview",
+      "preview": "Assets/Settings/Build Profiles/CI-Windows64-Preview.asset",
       "release_candidate": "CI-Windows-RC",
       "release": "CI-Windows-Release"
     },
     "StandaloneWindows64": {
-      "preview": "CI-Windows64-Preview",
+      "preview": "Assets/Settings/Build Profiles/CI-Windows64-Preview.asset",
       "release_candidate": "CI-Windows64-RC",
       "release": "CI-Windows64-Release"
     },

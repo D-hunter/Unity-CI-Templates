@@ -35,7 +35,6 @@ on:
         type: string
     secrets:
       CICD_PAT: { required: true }
-      BUTLER_API_KEY: { required: false }
       DEPLOY_API_KEY: { required: false }
       ITCH_USERNAME: { required: false }
       ITCH_PROJECT: { required: false }
@@ -75,7 +74,7 @@ jobs:
       ARTIFACT_DIR: deployment-artifacts/${{ inputs.projectName }}-${{ inputs.buildVersion }}
     steps:
       - name: 📥 Retrieve Artifacts from Release
-        uses: avalin/unity-ci-templates/.github/actions/download-from-release@main
+        uses: D-hunter/unity-ci-templates/.github/actions/download-from-release@main
         with:
           projectName: ${{ inputs.projectName }}
           version: ${{ inputs.buildVersion }}
@@ -94,7 +93,7 @@ jobs:
 
       - name: 📥 Retrieve Artifacts from Build (Per-Build-Target)
         if: ${{ inputs.artifactSource == 'build' && inputs.hasCombinedArtifacts == 'false' }}
-        uses: avalin/unity-ci-templates/.github/actions/download-per-build-target-artifacts-from-build@main
+        uses: D-hunter/unity-ci-templates/.github/actions/download-per-build-target-artifacts-from-build@main
         with:
           artifactDir: ${{ env.ARTIFACT_DIR }}
           projectName: ${{ inputs.projectName }}
@@ -105,7 +104,7 @@ jobs:
 
       - name: 🛠️ Normalize Artifact Layout (Release Per-Build-Target Only)
         if: ${{ inputs.artifactSource == 'release' && inputs.hasCombinedArtifacts == 'false' }}
-        uses: avalin/unity-ci-templates/.github/actions/normalize-artifact-layout@main
+        uses: D-hunter/unity-ci-templates/.github/actions/normalize-artifact-layout@main
         with:
           artifactDir: ${{ env.ARTIFACT_DIR }}
 
@@ -123,13 +122,13 @@ jobs:
 
       - name: 🔎 Detect WebGL Compression Format
         id: detect-compression
-        uses: avalin/unity-ci-templates/.github/actions/detect-webgl-compression@main
+        uses: D-hunter/unity-ci-templates/.github/actions/detect-webgl-compression@main
         with:
           artifactDir: ${{ env.ARTIFACT_DIR }}
 
       - name: 🩹 Patch & Decompress Unity WebGL for GitHub Pages
         if: ${{ matrix.target == 'gh-pages' && steps.detect-compression.outputs.needs_patch == 'true' }}
-        uses: avalin/unity-ci-templates/.github/actions/patch-webgl-for-gh-pages@main
+        uses: D-hunter/unity-ci-templates/.github/actions/patch-webgl-for-gh-pages@main
         with:
           artifactDir: ${{ env.ARTIFACT_DIR }}
 
@@ -141,10 +140,6 @@ jobs:
           publish_dir: "./${{ env.ARTIFACT_DIR }}/WebGL"
 
       # ───── itch.io ─────
-      - name: 🤵 Install Butler
-        if: matrix.target == 'itch.io'
-        uses: remarkablegames/setup-butler@v1
-
       - name: 🕹️ Deploy to itch.io
         if: matrix.target == 'itch.io'
         run: |
@@ -154,7 +149,7 @@ jobs:
           fi
           butler push "$ARTIFACT_DIR" "${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_PROJECT }}:${{ inputs.buildType }}"
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          BUTLER_API_KEY: ${{ secrets.DEPLOY_API_KEY }}
 
       # ───── App Center ─────
       - name: 📱 Deploy to App Center

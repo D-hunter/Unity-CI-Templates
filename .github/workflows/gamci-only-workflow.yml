@@ -1,0 +1,103 @@
+name: Actions 😎
+
+on:
+  # push:
+  #   branches: [ main, master ]
+  # pull_request:
+  #   branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      targetPlatform:
+        description: "Target platform to build"
+        required: false
+        default: "StandaloneWindows64"
+        type: choice
+        options:
+          - WebGL
+          - StandaloneWindows64
+          - StandaloneLinux64
+          - StandaloneOSX
+          - Android
+          - iOS
+
+jobs:
+  build:
+    name: Build my project ✨
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup build folder
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+      
+      # Checkout (without LFS)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # Git LFS
+      # - name: Create LFS file list
+      #   run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
+
+      # - name: Restore LFS cache
+      #   uses: actions/cache@v4
+      #   id: lfs-cache
+      #   with:
+      #     path: .git/lfs
+      #     key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
+
+      - name: Git LFS Pull
+        run: |
+          git lfs pull
+
+
+      # Cache
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # - name: Git Reset
+      #   run: |
+      #     git reset --hard HEAD
+      #     rm -rf .lfs-assets-id
+      #     git status
+
+      # Test
+      # - name: Run tests
+      #   uses: game-ci/unity-test-runner@v4
+      #   env:
+      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      #     UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      #     UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+      #   with:
+      #     unityVersion: 6000.0.36f1
+      #     githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # show input targetPlatform
+      - name: Information
+        run: |
+          echo "Target platform: ${{ inputs.targetPlatform || 'StandaloneWindows64' }}" 
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          unityVersion: 6000.0.36f1
+          targetPlatform: StandaloneWindows64
+          # allowDirtyBuild: true
+
+      # Output
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Build
+          path: build

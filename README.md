@@ -6,10 +6,10 @@ Search keywords: Unity CI/CD, Unity GitHub Actions, Unity automation pipeline, U
 
 **Robust GitHub Actions workflows for Unity projects. Automates testing, multi-platform builds, and GitHub Releases with modular, reusable design.**
 
-![CI](https://github.com/Avalin/CI-CD-Unity-Test-Project/actions/workflows/ci-cd-pipeline.yml/badge.svg)
-![License](https://img.shields.io/github/license/Avalin/CI-CD-Unity-Test-Project?color=blue)
+![CI](https://github.com/D-hunter/CI-CD-Unity-Test-Project/actions/workflows/ci-cd-pipeline.yml/badge.svg)
+![License](https://img.shields.io/github/license/D-hunter/CI-CD-Unity-Test-Project?color=blue)
 ![Unity](https://img.shields.io/badge/unity-2022.3%2B-black?logo=unity)
-![Latest Release](https://img.shields.io/github/v/release/Avalin/Unity-CI-Templates)
+![Latest Release](https://img.shields.io/github/v/release/D-hunter/Unity-CI-Templates)
 
 ## 🌐 WebGL Demo
 
@@ -23,17 +23,17 @@ See a live WebGL build deployed using this CI/CD pipeline:
 ## 🚀 Getting Started
 
 1️⃣ Ensure your Unity project is in a GitHub repository  
-2️⃣ Copy the required GitHub Actions workflows from the [CICD_Workflows folder](https://github.com/Avalin/Unity-CI-Templates/tree/main/CICD_Workflows)  
+2️⃣ Copy the required GitHub Actions workflows from the [CICD_Workflows folder](https://github.com/D-hunter/Unity-CI-Templates/tree/main/CICD_Workflows)  
 3️⃣ Add them to your repository at path: **.github → workflows** _(create folders if missing)_<br/>
-4️⃣ Configure the [required secrets](https://github.com/Avalin/Unity-CI-Templates/wiki/Required-Secrets) in your repository<br/>
-5️⃣ Read and optionally setup [repository variables](https://github.com/Avalin/Unity-CI-Templates/wiki/Repository-Variables), they're important to understand the inputs for the workflow dispatch<br/>
-6️⃣ Try dispatching the `ci-cd-dispatcher.yml` workflow or push a Git tag using [SemVer](https://github.com/Avalin/Unity-CI-Templates/wiki/Versioning-&-Tagging) to see the pipeline in action! <br/>
+4️⃣ Configure the [required secrets](https://github.com/D-hunter/Unity-CI-Templates/wiki/Required-Secrets) in your repository<br/>
+5️⃣ Read and optionally setup [repository variables](https://github.com/D-hunter/Unity-CI-Templates/wiki/Repository-Variables), they're important to understand the inputs for the workflow dispatch<br/>
+6️⃣ Try dispatching the `ci-cd-dispatcher.yml` workflow or push a Git tag using [SemVer](https://github.com/D-hunter/Unity-CI-Templates/wiki/Versioning-&-Tagging) to see the pipeline in action! <br/>
 
 > ⚠️ Currently tested deploy targets: `gh-pages` (WebGL only). Others are implemented but not yet fully verified. Contributions welcome!
 
 ## 📖 Documentation
 
-For full setup instructions, deployment target guides, and advanced configuration tips, see the ➡️ [Wiki](https://github.com/Avalin/Unity-CI-Templates/wiki)
+For full setup instructions, deployment target guides, and advanced configuration tips, see the ➡️ [Wiki](https://github.com/D-hunter/Unity-CI-Templates/wiki)
 
 ## 📌 Features
 

@@ -1,14 +1,14 @@
 {
   "unity": {
-    "version": "auto"
+    "version": "6000.0.36f1"
   },
   "project": {
-    "name": "My_Project"
+    "name": "Project-Name"
   },
   "pipeline": {
-    "useGitLfs": false,
+    "useGitLfs": true,
     "quietMode": false,
-    "excludeUnityTests": false,
+    "excludeUnityTests": true,
     "forceCombineArtifacts": false
   },
   "tests": {
@@ -28,7 +28,7 @@
       "release": 30
     },
     "defaultTargets": [
-      "WebGL"
+      "Android"
     ],
     "availableTargets": [
       "Android",
@@ -43,7 +43,6 @@
   },
   "deploy": {
     "defaultTargets": [
-      "gh-pages"
     ],
     "availableTargets": [
       "itch.io",

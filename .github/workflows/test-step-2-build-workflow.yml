@@ -64,6 +64,7 @@ jobs:
       projectName: ${{ needs.prepare_metadata.outputs.projectName }}
       buildTargets: ${{ inputs.buildTargets }}
       combineArtifacts: ${{ needs.prepare_metadata.outputs.requiresCombined }}
+      useGitLfs: ${{ needs.prepare_metadata.outputs.useGitLfs }}
     secrets:
       UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
       UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}

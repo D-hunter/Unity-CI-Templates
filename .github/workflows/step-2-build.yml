@@ -114,7 +114,7 @@ jobs:
 
       - name: Resolve Build Profile
         id: resolve_build_profile
-        uses: D-hunter/unity-ci-templates/.github/actions/resolve-build-profile@main
+        uses: D-hunter/unity-ci-templates/.github/actions/resolve-build-profile@v1
         with:
           buildTarget: ${{ matrix.buildTarget }}
           buildType: ${{ inputs.buildType }}
@@ -122,7 +122,7 @@ jobs:
 
       - name: Resolve Unity Run Parameters
         id: resolve_run_parameters
-        uses: D-hunter/unity-ci-templates/.github/actions/resolve-unity-run-parameters@main
+        uses: D-hunter/unity-ci-templates/.github/actions/resolve-unity-run-parameters@v1
         with:
           buildTarget: ${{ matrix.buildTarget }}
 

@@ -100,7 +100,7 @@ jobs:
 
       - name: ⏳ Prepare Metadata
         id: metadata
-        uses: D-hunter/unity-ci-templates/.github/actions/prepare-metadata@main
+        uses: D-hunter/unity-ci-templates/.github/actions/prepare-metadata@v1
         with:
           artifactSource: build
           projectNameInput: ${{ inputs.projectName }}
@@ -148,13 +148,13 @@ jobs:
 
       - name: 🔍 Detect Tests-Only Mode
         id: tests_only
-        uses: D-hunter/unity-ci-templates/.github/actions/detect-tests-only@main
+        uses: D-hunter/unity-ci-templates/.github/actions/detect-tests-only@v1
         with:
           testsOnlyInput: ${{ inputs.testsOnly }}
 
       - name: 🔍 Detect Skip Tests Flag
         id: skip_tests
-        uses: D-hunter/unity-ci-templates/.github/actions/detect-skip-tests@main
+        uses: D-hunter/unity-ci-templates/.github/actions/detect-skip-tests@v1
         with:
           skipTestsInput: ${{ inputs.skipTests }}
           skipTestsRepoVar: ${{ steps.metadata.outputs.excludeUnityTests }}

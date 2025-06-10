@@ -66,7 +66,7 @@ jobs:
       has_playmode: ${{ steps.detect.outputs.has_playmode }}
     steps:
       - id: detect
-        uses: D-hunter/unity-ci-templates/.github/actions/detect-tests-existence@main
+        uses: D-hunter/unity-ci-templates/.github/actions/detect-tests-existence@v1
         with:
           editModePath: ${{ inputs.editModePath }}
           playModePath: ${{ inputs.playModePath }}

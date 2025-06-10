@@ -41,7 +41,7 @@ jobs:
 
       - name: Resolve Build Version
         id: get_version
-        uses: D-hunter/unity-ci-templates/.github/actions/resolve-build-version@main
+        uses: D-hunter/unity-ci-templates/.github/actions/resolve-build-version@v1
         with:
           ref: "${GITHUB_REF}"
           event: "${GITHUB_EVENT_NAME}"
@@ -50,7 +50,7 @@ jobs:
 
       - name: 📝 Check if Release Version Already Exists
         id: check_release
-        uses: D-hunter/unity-ci-templates/.github/actions/check-release-exists@main
+        uses: D-hunter/unity-ci-templates/.github/actions/check-release-exists@v1
         with:
           version: ${{ steps.get_version.outputs.version }}
           repo: ${{ github.repository }}

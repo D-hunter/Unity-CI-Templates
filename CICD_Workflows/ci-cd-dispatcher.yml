@@ -127,11 +127,7 @@ jobs:
       - validation
       - prepare_metadata
     if: ${{ needs.validation.outputs.should_run == 'true'}}
-<<<<<<< HEAD
-    uses: avalin/unity-ci-templates/.github/workflows/build-version-tagger.yml@v1
-=======
     uses: D-hunter/unity-ci-templates/.github/workflows/build-version-tagger.yml@v1
->>>>>>> origin/v1
     with:
       buildType: ${{ needs.prepare_metadata.outputs.buildType }}
       buildVersion: ${{ needs.prepare_metadata.outputs.buildVersion }}

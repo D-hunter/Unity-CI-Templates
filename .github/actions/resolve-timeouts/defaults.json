@@ -3,6 +3,6 @@
     "timeoutMinutes": 15
   },
   "build": {
-    "timeoutMinutes": 30
+    "timeoutMinutes": 90
   }
 }

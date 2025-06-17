@@ -21,7 +21,7 @@
     "timeoutMinutes": 15
   },
   "build": {
-    "timeoutMinutes": 30,
+    "timeoutMinutes": 90,
     "retentionDays": {
       "preview": 7,
       "release_candidate": 14,

@@ -112,6 +112,7 @@ jobs:
       buildVersion: ${{ needs.unpack_inputs.outputs.buildVersion }}
       buildType: ${{ needs.unpack_inputs.outputs.buildType }}
       buildTargets: ${{ inputs.buildTargets }}
+      useGitLfs: ${{ needs.unpack_inputs.outputs.useGitLfs }}
       combineArtifacts: ${{ needs.unpack_inputs.outputs.requiresCombined }}
       timeoutMinutes: ${{ fromJson(needs.unpack_inputs.outputs.timeoutMinutesBuild) }}
       retentionDays: ${{ fromJson(needs.unpack_inputs.outputs.retentionDays) }}

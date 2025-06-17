@@ -135,7 +135,7 @@ jobs:
         with:
           unityVersion: ${{ inputs.unityVersion }}
           targetPlatform: ${{ steps.resolve_run_parameters.outputs.targetPlatform }}
-          # allowDirtyBuild: true
+          allowDirtyBuild: true
           customParameters: >-
             ${{ steps.resolve_run_parameters.outputs.customParameters }}
             ${{ steps.resolve_build_profile.outputs.profile && format('-buildProfile {0}', steps.resolve_build_profile.outputs.profile) || '' }}

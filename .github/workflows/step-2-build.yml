@@ -81,9 +81,6 @@ jobs:
         include: ${{ fromJson(needs.generate_matrix.outputs.matrix) }}
 
     steps:
-      - name: Hard reset to local HEAD
-        run: git reset --hard
-        
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:

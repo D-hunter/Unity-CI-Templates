@@ -100,7 +100,7 @@ jobs:
             Library
             Library/BuildCache
             Library/Il2cppBuildCache
-          key: Library-${{ matrix.buildTarget }}-${{ github.run_id }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          key: Library-${{ matrix.buildTarget }}-
           restore-keys: |
             Library-${{ matrix.buildTarget }}-
             Library-

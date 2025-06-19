@@ -31,6 +31,23 @@ See a live WebGL build deployed using this CI/CD pipeline:
 
 > ⚠️ Currently tested deploy targets: `gh-pages` (WebGL only). Others are implemented but not yet fully verified. Contributions welcome!
 
+### 🚀 Advanced CI Setup
+🐳💻 <strong>Optional: Self-Hosted GitHub Runner with Docker</strong>
+
+Want to run Unity builds on your own hardware? Set up a **Docker-powered GitHub Actions runner**:
+
+**📋 Quick Setup Guide:**
+- 🔗 **Repository:** [myoung34/docker-github-actions-runner](https://github.com/myoung34/docker-github-actions-runner)
+- 🐳 **Method:** Docker containerization for easy deployment
+- ⚙️ **Benefits:** Custom build environments & hardware control
+
+**💡 Perfect for:**
+- 💻 Running Unity builds on your own powerful hardware
+- 🛠️ Custom build environments with specific tools/dependencies  
+- 🔒 Private/secure build environments behind firewalls
+
+</details>
+
 ## 📖 Documentation
 
 For full setup instructions, deployment target guides, and advanced configuration tips, see the ➡️ [Wiki](https://github.com/D-hunter/Unity-CI-Templates/wiki)

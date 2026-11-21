@@ -32,6 +32,7 @@ jobs:
       - name: 📅 Download All Build Target Artifacts
         uses: actions/download-artifact@v4
         with:
+          pattern: ${{ inputs.projectName }}-${{ inputs.buildVersion }}-*
           path: all-artifacts
 
       - name: 🗂️ Combine Into Single Versioned Folder
@@ -53,6 +54,14 @@ jobs:
             cp -r "$DIR/"* "$DEST/" || echo "⚠️ Nothing to copy for $TARGET"
             rm -rf "$DEST/unity_license"
           done
+
+      - name: 🔒 Fail If License Files Are In The Output
+        run: |
+          COMBINED_DIR="${{ inputs.projectName }}-${{ inputs.buildVersion }}"
+          if find "$COMBINED_DIR" \( -iname '*.ulf' -o -ipath '*/license/*' \) | grep -q .; then
+            echo "::error::License file found in $COMBINED_DIR"
+            exit 1
+          fi
 
       - name: 📦 Upload Combined Artifact
         id: upload
